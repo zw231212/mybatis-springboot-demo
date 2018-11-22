@@ -2,7 +2,8 @@ package com.zzq.api.mapper;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.zzq.api.model.pojo.EmSite;
+import com.zzq.dao.mapper.InfoMapper;
+import com.zzq.dao.model.pojo.EmSite;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

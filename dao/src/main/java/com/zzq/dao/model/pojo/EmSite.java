@@ -4,12 +4,9 @@
 * Copyright(C) 2017-2020 http://www.escience.org.cn
 * @date 2018-11-20
 */
-package com.zzq.api.model.pojo;
+package com.zzq.dao.model.pojo;
 
 import lombok.Data;
-import tk.mybatis.mapper.annotation.KeySql;
-
-import javax.persistence.Id;
 import java.util.Date;
 
 @Data
@@ -17,8 +14,6 @@ public class EmSite {
     /**
      * 
      */
-    @Id
-    @KeySql(useGeneratedKeys = true)
     private Integer id;
 
     /**
