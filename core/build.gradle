@@ -1,0 +1,27 @@
+
+description "核心模块"
+
+version = "${rootProject.version}" //也可以不写，默认继承父模块 version
+archivesBaseName = 'core'
+
+mainClassName = "com.zzq.core.MonitorCoreApplication" //指定 Jar 启动 Main
+jar {
+    from {
+        //添加依懒到打包文件
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+//        configurations.runtime.collect{zipTree(it)}
+    }
+
+    manifest {
+        attributes 'Implementation-Version': version,
+                'Main-Class': mainClassName
+    }
+}
+
+dependencies{
+    // httpclient
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.6'
+    // commons-lang3
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+
+}

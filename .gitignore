@@ -1,0 +1,15 @@
+.settings
+.idea
+.gradle
+classes/
+.project
+**.iml
+target/**
+out/**
+*/target/**
+*/build/**
+!/web/build/**
+*/classes/**
+*/out/**
+*/node_modules/**
+

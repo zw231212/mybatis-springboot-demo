@@ -1,0 +1,44 @@
+server:
+  port: 8080
+
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/es-monitor?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
+    username: root
+    password: tiger
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 40
+      connection-test-query: select 1;
+      connection-timeout: 30000
+      read-only: false
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/, classpath:/static/, classpath:/public/, file:${spring.http.multipart.location}
+# MyBatis
+mybatis:
+  typeAliasesPackage: conm.zzq.api.model.pojo
+  mapperLocations: classpath:mapper/*.xml
+  configLocation: classpath:mybatis-conf.xml
+
+mapper:
+  mappers: tk.mybatis.mapper.common.Mapper
+  notEmpty: true
+  identity: MYSQL
+
+##虚拟导航路径名称
+static:
+  filePath: /file/**
+
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+
+logging:
+  level: tk.mybatis.springboot.mapper=trace

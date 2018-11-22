@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!--下划线和驼峰的自动转换-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--开启查询缓存，全局开关：默认是true，如果它配成false，其余各个Mapper XML文件配成支持cache也没用。-->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+</configuration>
