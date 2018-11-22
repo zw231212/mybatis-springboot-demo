@@ -44,7 +44,6 @@ public interface InfoMapper {
     @Select("SELECT * FROM em_site")
     List<EmSite> findSite();
 }
-
 //test信息
 PageHelper.startPage(0, 2);
 List<EmSite> site = infoMapper.findSite();
@@ -65,3 +64,30 @@ PageInfo<EmSite> pageInfo = new PageInfo<>(sites , 5);
  System.out.println(pageInfo);
 ```
 这里pages显示为和size一样的大小（size=1，pages=1;size=2,pages=2）。
+
+sql信息
+```sql
+-- ----------------------------
+-- Table structure for `em_site`
+-- ----------------------------
+DROP TABLE IF EXISTS `em_site`;
+CREATE TABLE `em_site` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` varchar(255) NOT NULL COMMENT '用户的id',
+  `name` varchar(128) DEFAULT NULL COMMENT '网站的名称信息',
+  `url` varchar(255) NOT NULL COMMENT '网络的url信息',
+  `create_time` bigint(20) NOT NULL COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间，主动更新',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of em_site
+-- ----------------------------
+INSERT INTO `em_site` VALUES ('1', '12312', '共享', 'https://www.zzq.org.cn', '1542705391242', '2018-11-22 16:03:41');
+INSERT INTO `em_site` VALUES ('2', '12312', '共享', 'https://www.zzq1.org.cn', '1542705446545', '2018-11-22 16:03:43');
+INSERT INTO `em_site` VALUES ('3', '12312', '共享', 'http://share.zzq2.net.cn', '1542706587154', '2018-11-22 16:03:45');
+INSERT INTO `em_site` VALUES ('4', '12312', '共享', 'http://share.zzq3.net.cn', '1542706675007', '2018-11-22 16:03:47');
+INSERT INTO `em_site` VALUES ('5', '12312', '共享', 'http://share.zzq.net.cn', '1542706702309', '2018-11-22 16:03:53');
+
+```
