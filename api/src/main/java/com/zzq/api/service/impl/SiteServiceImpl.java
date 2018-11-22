@@ -55,27 +55,20 @@ public class SiteServiceImpl implements SiteService {
         Example example = new Example.Builder(EmSite.class).where(Sqls.custom()
                 .andEqualTo("uid", uid)).build();
 
-        RowBounds rowBounds = new RowBounds(num, size);
-        List<EmSite> emSites = emSiteMapper.selectByExampleAndRowBounds(example, rowBounds);
-        System.out.println("==================*****************==============================");
-        for (EmSite emSite : emSites) {
-            System.out.println(emSite);
-        }
-        System.out.println(rowBounds.getLimit());
-        System.out.println(rowBounds.getOffset());
-        System.out.println("==================*****************==============================");
-
         PageHelper.startPage(num, size);
         List<EmSite> sites = emSiteMapper.selectByExample(example);
-        List<SiteVo> svoList = new ArrayList<>();
-        sites.forEach(site -> svoList.add(new SiteVo(site)));
-        System.out.println("************************************");
-        for (SiteVo site : svoList) {
-            System.out.println(site);
-        }
-        System.out.println("************************************");
-        PageInfo<SiteVo> pageInfo = new PageInfo<>(svoList, 5);
-        System.out.println(pageInfo);
+        PageInfo info = new PageInfo(sites);
+        System.out.println(info);
+        System.out.println("=============================================");
+//        List<SiteVo> svoList = new ArrayList<>();
+//        sites.forEach(site -> svoList.add(new SiteVo(site)));
+//        System.out.println("************************************");
+//        for (SiteVo site : svoList) {
+//            System.out.println(site);
+//        }
+//        System.out.println("************************************");
+//        PageInfo<SiteVo> pageInfo = new PageInfo<>(svoList, 5);
+//        System.out.println(pageInfo);
 
         return new Page<>();
     }
