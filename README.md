@@ -96,18 +96,18 @@ INSERT INTO `em_site` VALUES ('5', '12312', '共享', 'http://share.zzq.net.cn',
 
 失效的原因在于我在查询出list后又进行了一步操作，如下所示：
 ```java
-        PageHelper.startPage(num, size);
-        List<EmSite> sites = emSiteMapper.selectByExample(example);
-        //将原来的数据库的bean转换一下后就出问题了
-        List<SiteVo> svoList = new ArrayList<>();
-        sites.forEach(site -> svoList.add(new SiteVo(site)));
-        System.out.println("************************************");
-        for (SiteVo site : svoList) {
-            System.out.println(site);
-        }
-        System.out.println("************************************");
-        PageInfo<SiteVo> pageInfo = new PageInfo<>(svoList, 5);//这里分页信息会显示有问题
-        PageInfo<EmSite> pageInfo1 = new PageInfo<>(sites, 5);//这里不会显示有问题，是正确的!
-        System.out.println(pageInfo);
+PageHelper.startPage(num, size);
+List<EmSite> sites = emSiteMapper.selectByExample(example);
+//将原来的数据库的bean转换一下后就出问题了
+List<SiteVo> svoList = new ArrayList<>();
+sites.forEach(site -> svoList.add(new SiteVo(site)));
+System.out.println("************************************");
+for (SiteVo site : svoList) {
+   System.out.println(site);
+}
+System.out.println("************************************");
+PageInfo<SiteVo> pageInfo = new PageInfo<>(svoList, 5);//这里分页信息会显示有问题
+PageInfo<EmSite> pageInfo1 = new PageInfo<>(sites, 5);//这里不会显示有问题，是正确的!
+System.out.println(pageInfo);
 ```
  
