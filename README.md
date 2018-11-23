@@ -111,3 +111,41 @@ PageInfo<EmSite> pageInfo1 = new PageInfo<>(sites, 5);//这里不会显示有问
 System.out.println(pageInfo);
 ```
  
+ 具体的原因在于，在new PageInfo的时候，它有个判断这个List是不是Page对象
+ ```java
+  public PageInfo(List<T> list, int navigatePages) {
+        super(list);
+        if (list instanceof Page) {
+      
+        /**
+        * //这里的这个page对象属于：com.github.pagehelper.Page<T>，如下所示：
+        * public class Page<E> extends ArrayList<E> implements Closeable
+        */
+            Page page = (Page) list;
+            ……
+        } else if (list instanceof Collection) {
+            ……
+        }
+        ……
+    }
+ ```
+
+```
+ 那这个Page对象是在什么时候转的了？
+ debug溯源：
+ PageInterceptor.intercept:进入dialect.afterPage(resultList, parameter, rowBounds)方法 -->
+ 进去后是一个接口：Dialect，它有几个实现类AbstractHelperDialect、AbstractRowBoundsDialect、PageHelper。进去AbstractHelperDialect，进入PageHelper最终也会导航到AbstractHelperDialect。
+ 这个抽象类的afterPage方法如下：
+    @Override
+    public Object afterPage(List pageList, Object parameterObject, RowBounds rowBounds) {
+        Page page = getLocalPage();
+        if (page == null) {
+            return pageList;
+        }
+        page.addAll(pageList);
+        ……
+        return page;
+    }
+    在这里完成了一个原生的list到pagehelper插件的Page对象的转换，具体深入的先到这里吧，后续再跟进吧，也许还是有问题的。PageHelper这边是把查询返回的model bean 和Page相关联了。
+```
+ 
