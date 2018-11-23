@@ -3,7 +3,7 @@ package com.zzq.api.model.vo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import com.zzq.api.model.pojo.EmSite;
+import com.zzq.dao.model.pojo.EmSite;
 
 import java.io.Serializable;
 import java.util.Date;

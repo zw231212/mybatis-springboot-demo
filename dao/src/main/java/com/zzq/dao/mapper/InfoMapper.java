@@ -1,6 +1,6 @@
-package com.zzq.api.mapper;
+package com.zzq.dao.mapper;
 
-import com.zzq.api.model.pojo.EmSite;
+import com.zzq.dao.model.pojo.EmSite;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
