@@ -1,6 +1,6 @@
 springboot集成mybatis通用mapper和pagehelper
-
-问题描述（后期不经意间将mybatis的依赖去掉后，分页就突然好了！这都是什么鬼！）：
+（问题解决了，具体问题看最后吧，这是泪崩的，这个问题纠结了好久，蛋疼！）
+问题描述
 
 多模块项目，子模块集成Pagehelper后通用mapper分页失效
 --------------------------
@@ -93,3 +93,21 @@ INSERT INTO `em_site` VALUES ('4', '12312', '共享', 'http://share.zzq3.net.cn'
 INSERT INTO `em_site` VALUES ('5', '12312', '共享', 'http://share.zzq.net.cn', '1542706702309', '2018-11-22 16:03:53');
 
 ```
+
+失效的原因在于我在查询出list后又进行了一步操作，如下所示：
+```java
+        PageHelper.startPage(num, size);
+        List<EmSite> sites = emSiteMapper.selectByExample(example);
+        //将原来的数据库的bean转换一下后就出问题了
+        List<SiteVo> svoList = new ArrayList<>();
+        sites.forEach(site -> svoList.add(new SiteVo(site)));
+        System.out.println("************************************");
+        for (SiteVo site : svoList) {
+            System.out.println(site);
+        }
+        System.out.println("************************************");
+        PageInfo<SiteVo> pageInfo = new PageInfo<>(svoList, 5);//这里分页信息会显示有问题
+        PageInfo<EmSite> pageInfo1 = new PageInfo<>(sites, 5);//这里不会显示有问题，是正确的!
+        System.out.println(pageInfo);
+```
+ 
