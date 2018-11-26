@@ -1,5 +1,6 @@
 springboot集成mybatis通用mapper和pagehelper
 （问题解决了，具体问题看最后吧，这是泪崩的，这个问题纠结了好久，蛋疼！）
+
 问题描述
 
 多模块项目，子模块集成Pagehelper后通用mapper分页失效
